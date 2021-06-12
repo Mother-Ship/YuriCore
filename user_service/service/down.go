@@ -27,8 +27,11 @@ func (d *downServiceImpl) Handle(ctx context.Context) error {
 	if u == nil || u.UserID == 0 {
 		return errors.New("down: wrong user id")
 	}
-	if err := client.GetDBClient().UpdateUser(ctx, u); err != nil {
-		DebugPrintf(2, "down: update user failed! user=%+v\n", *u)
+	DBClient := client.GetDBClient()
+	if DBClient != nil {
+		if err := DBClient.UpdateUser(ctx, u); err != nil {
+			DebugPrintf(2, "down: update user failed! user=%+v\n", *u)
+		}
 	}
 	return client.GetUserTableClient().DeleteUserByID(ctx, d.userID)
 }

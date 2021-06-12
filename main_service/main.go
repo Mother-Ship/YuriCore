@@ -12,7 +12,7 @@ import (
 
 var (
 	// SERVERVERSION 版本号
-	SERVERVERSION = "v1.3"
+	SERVERVERSION = "v1.5"
 )
 
 func main() {
